@@ -1,9 +1,6 @@
-﻿# hcv
-Home control Modul for Viessmann Vitocal
+﻿# Local Viessmann E3 CAN-to-MQTT Bridge
 
-# Please also read the HCV Description in the docu folder.
-
-# Local Viessmann E3 CAN-to-MQTT Bridge
+## Please also read the HCV Description in the docu folder.
 
 An isolated, passive CAN-bus adapter to fetch local data from Viessmann E3-generation heat pumps (e.g., Vitocal 250-A, 252-A) and stream it via Wi-Fi to MQTT with native Home Assistant Auto-Discovery.
 
