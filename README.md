@@ -112,6 +112,25 @@ To avoid parsing errors on the microcontroller, ensure your `vcalobj.did` strict
 3. Navigate to the **File Upload** section, select your `vcalobj.did` file, and hit upload.
 4. The adapter will validate the file, save it to the internal flash storage, and dynamically reload the database into RAM without needing a manual hardware reset.
 
+## 🚗 Integration with evcc (PV Charging Manager)
+
+The embdes adapter can be integrated into [evcc](https://evcc.io) as a passive **heat pump power meter**. Since the adapter operates strictly in **read-only mode**, it is 100% safe and will not interfere with your Viessmann warranty.
+
+To display your heat pump's consumption in evcc, add the following configuration to your `evcc.yaml`:
+
+```yaml
+meters:
+  - name: viessmann_heatpump
+    type: custom
+    power:
+      source: mqtt
+      topic: viessmann/wp/state
+      jq: .EnergieaufnahmeProTagInKWh oder EnergyConsumptionCentralHeating # Fetches the daily energy counter from the JSON payload
+```
+
+*Note: The adapter acts as a pure data provider (Push-to-MQTT). No active HTTP polling or writing to the CAN-bus is required or supported.*
+
+
 ## ✉️ Contact & Support
 
 If you want to buy a pre-assembled board or a software license, please contact me:
@@ -120,3 +139,10 @@ If you want to buy a pre-assembled board or a software license, please contact m
 - **Email:** `info@embdes.com`
 
 *Disclaimer: This is a third-party community project. This project is not affiliated with, authorized, or endorsed by Viessmann.*
+
+## Links & Resources
+
+- [GitHub Repository](https://github.com/chrkir/hcv)
+- [Dokumentation](https://github.com/chrkir/hcv/tree/main/docu)
+- [Hardware Ordner](https://github.com/chrkir/hcv/tree/main/hardware)
+- [Software Ordner](https://github.com/chrkir/hcv/tree/main/software)
