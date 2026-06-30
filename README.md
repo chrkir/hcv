@@ -21,14 +21,6 @@ This project follows a hybrid **Open Hardware / Commercial Software** model to s
 ### 1. Open Hardware (Free)
 All hardware files are open-source. You can find the schematics, PCB layout files (KiCAD/EasyEDA), Bill of Materials (BOM), and a 3D-printable enclosure STL file in the `/hardware` folder. Feel free to DIY and order your own boards.
 
-
-
-
-
-
-
-
-
 ### 2. Pre-Assembled Hardware (Optional)
 If you do not want to solder SMD components or lack the equipment, you can buy a fully assembled and tested hardware unit inside its enclosure directly from me for **approx. €35** (plus shipping from Germany). 
 
@@ -37,8 +29,6 @@ If you do not want to solder SMD components or lack the equipment, you can buy a
 - **Full Version (€50):** Unlocks all heating data points, daily energy counters, and native Home Assistant Auto-Discovery. It is a one-time payment per device and works **100% offline** (via a license file uploaded to the file system).
 
 ---
-
-
 
 ## 💻 Getting Started
 
@@ -69,31 +59,58 @@ To unlock all sensors and Home Assistant Auto-Discovery:
 
 ---
 
-## Sample of ioBroker Integration
+## ⚙️ Customizing Data Points (Selective DIDs)
 
+By default, the adapter processes all available data points. To keep your MQTT broker clean and reduce network traffic, you can now upload a custom selection profile via a `vcalobj.did` file through the web interface. 
 
+Only the DIDs specified in this file will be active on the CAN bus, transmitted via MQTT, and displayed in the local web app.
 
+### File Format (`vcalobj.did`)
 
+The file must be uploaded as a plain text or CSV-like format using the following structure:
+`{ID, Description_Original, Description_Custom, Byte_Position, Display_Flag, DID_TYPE}`
 
+Here is a verified example for a minimal setup (Core temperatures, flowrate, and energy counters):
 
+```did
+# ==============================================================================
+# embdes Viessmann E3 Custom DID Profile
+# Remove or add rows to customize your MQTT payload and local dashboard.
+# Line comments starting with '#' are fully supported.
+# ==============================================================================
 
+# Core Temperatures
+{268, OutdoorTemperatureSensor, Aussentemperatur, 0, 1, FLOAT_TEMP_10},
+{271, DomesticHotWaterSensor, WarmwasserTemperatur, 0, 1, FLOAT_TEMP_10},
+{274, FlowTemperatureSensor, Vorlauftemperatur, 0, 1, FLOAT_TEMP_10},
 
+# Flowrate & Hydraulics
+{1041, VolumetricFlowrateSensor, DurchflussSensorStd, 0, 1, FLOAT_LH},
 
+# Energy Dashboard
+{548, EnergyConsumptionPerDay, EnergieaufnahmeProTagInKWh, 0, 1, P_KWH},
 
+# Binary States (On/Off)
+{401, MixerPumpStatus, StatusMischerPumpe, 0, 1, ON_OFF},
+```
 
+### ⚠️ Critical Formatting Rules
 
+To avoid parsing errors on the microcontroller, ensure your `vcalobj.did` strictly adheres to these rules:
 
+1. **No trailing spaces before commas:** Ensure numeric values do not contain spaces before a comma (e.g., use `1,` instead of `1 ,`).
+2. **Entity naming:** Avoid special characters like `%` within the custom description strings. Use clean alphanumeric names (e.g., `LuefterEinsDrehzahl` instead of `LuefterEinsDrehzahl%`).
+3. **Valid Data Types:** Supported `DID_TYPE` tokens are:
+   - `FLOAT_TEMP_10`, `FLOAT_PRES_10`, `FLOAT_PRES_100`
+   - `ON_OFF`, `INT_TIME`, `INT_PERC`, `P_KWH`, `P_WATT`
+   - `FLOAT_LH`,  `INTEGER`
 
+### How to apply changes
 
-
-
-
-
-
-
-
-
-
+1. Create or edit your `vcalobj.did` file using a standard text editor (like VS Code or Notepad++).
+2. Open the adapter's web interface in your browser.
+3. Navigate to the **File Upload** section, select your `vcalobj.did` file, and hit upload.
+4. The adapter will validate the file, save it to the internal flash storage, and dynamically reload the database into RAM without needing a manual hardware reset.
 
 ## ✉️ Contact & Support
 
