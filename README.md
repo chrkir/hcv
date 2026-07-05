@@ -30,6 +30,13 @@ If you do not want to solder SMD components or lack the equipment, you can buy a
 
 ---
 
+<br>
+<p align="center"> 
+<img src="images/HomeAssi-eng-2.png" width="500"><img src="images/HCV-Setup.PNG" width="330></p>
+<br>
+
+---
+
 ## 💻 Getting Started
 
 ### Hardware Connection
