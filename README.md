@@ -22,11 +22,15 @@ This project follows a hybrid **Open Hardware / Commercial Software** model to s
 All hardware files are open-source. You can find the schematics, PCB layout files (KiCAD/EasyEDA), Bill of Materials (BOM), and a 3D-printable enclosure STL file in the `/hardware` folder. Feel free to DIY and order your own boards.
 
 ### 2. Pre-Assembled Hardware (Optional)
-If you do not want to solder SMD components or lack the equipment, you can buy a fully assembled and tested hardware unit inside its enclosure directly from me for **approx. €35** (plus shipping from Germany). 
+If you do not want to solder SMD components or lack the equipment, you can buy a fully assembled and tested hardware unit inside its enclosure directly from me for **approx. €35 + MwSt ** (plus shipping from Germany). 
 
 ### 3. Firmware & Software License
 - **Demo Version (Free):** Includes the local Wi-Fi/MQTT captive portal captive setup, hardware connection test, and displays your unique ESP32 Chip ID.
-- **Full Version (€50):** Unlocks all heating data points, daily energy counters, and native Home Assistant Auto-Discovery. It is a one-time payment per device and works **100% offline** (via a license file uploaded to the file system).
+- **Full Version (€48 + MwSt)** Unlocks all heating data points, daily energy counters, and native Home Assistant Auto-Discovery. It is a one-time payment per device and works **100% offline** (via a license file uploaded to the file system).
+
+---
+
+![Home Assistant Dashboard](images/HomeAssi-eng-2.png)  ![HCV Configuration Options](images/HCV-Setup.PNG)
 
 ---
 
