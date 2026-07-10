@@ -37,7 +37,7 @@ If you do not want to solder SMD components or lack the equipment, you can buy a
 ## 💻 Getting Started
 
 ### Hardware Connection
-Connect the adapter to the external CAN-bus of your Viessmann heat pump (typically labeled as "Plug 91" / Stecker 91 on the main terminal block). 
+Connect the adapter to the **INTERNAL** CAN-bus of your Viessmann heat pump (typically labeled as "Plug 72" / Stecker 72 on the main terminal block). 
 
 ### Firmware Setup
 1. Flash the free firmware build to your ESP32.
