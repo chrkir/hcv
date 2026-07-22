@@ -1,4 +1,4 @@
-﻿# Local Viessmann E3 CAN-to-MQTT Bridge
+﻿# Viessmann Vitocal (E3) CAN-Bus to MQTT Bridge with Home Assistant Support
 
 ## Please also read the HCV Description in the docu folder.
 
