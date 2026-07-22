@@ -1,0 +1,52 @@
+#
+#  Anmerkung: die Daten in der Konfigurationsdatei erlauben eine flexible Anpassung der
+#  angezeigten und als MQTT Topic übertragenen Viessmann E3-Objekte
+#
+#  In der ersten Position wird das E3 DID-Objekt angegeben
+#  der nachfolgende Text ist die original E3-Definition
+#  der zweite Text kann ein beliebiger sein, so z.B. eine Übersetzung in eine eigene Sprache
+#  der vierte Wert definiert die Position in der CAN - Nachricht der zur Anzeige und MQTT
+#  Nachricht übernommen wird
+#  der fünfte Wert besagt ob der Wert in der HTML Tabelle angezeigt wird und ist der einzige Wert
+#  der geändert werden kann
+#  der sechste und letzte Wert bestimmt die Auswertung des aus der CAN-Nachricht gelesen Daten
+#  für die Anzeige und MQTT-Nachrichten und ist durch E3-Spezifikation bestimmt
+#  Eine ID kann von der Verarbeitung per MQTT oder Anzeige durch voransetzen von '#' 
+#  ausgeschlossen werden
+#
+{271, DomesticHotWaterSensor, Warmwasser Temperatur, 						0, 1, FLOAT_TEMP_10},
+{274, OutsideTemperatureSensor, Aussentemperatur,	 						0, 1, FLOAT_TEMP_10},
+{268, FlowTemperatureSensor, Vorlauftemperatur,  							0, 1, FLOAT_TEMP_10},
+{269, ReturnTemperatureSensor, AusseneinheitRuecklaufTemperatur, 			0, 1, FLOAT_TEMP_10},
+{282, HydraulicSeparatorTemperatureSensor, HydraulischeWeicheTemperatur, 	0, 1, FLOAT_TEMP_10},
+{284, MixerOneCircuitFlowTemperatureSensor, MischerTemperatur, 				0, 1, FLOAT_TEMP_10},
+{318, WaterPressureSensor, Wasserdruck,										0, 1, FLOAT_PRES_10},
+{320, PrimaryHeatExchangerLiquidTemperatureSensor, WaermetauscherTemperatur, 0, 1, FLOAT_TEMP_10},
+{321, CompressorInletTemperatureSensor, KompressorEingangTemperatur, 		0, 1, FLOAT_TEMP_10},
+{322, CompressorInletPressureSensor, KompressorEingangDruck,  				0, 1, FLOAT_PRES_100},
+{324, CompressorOutletTemperatureSensor, KompressorAusgangTemperatur, 		0, 1, FLOAT_TEMP_10},
+{325, CompressorOutletPressureSensor, KompressorAusgangDruck, 				0, 1, FLOAT_PRES_100},
+{355, SecondaryHeatExchangerLiquidTemperatureSensor, ZusatzheizungTemperatur, 0, 1, FLOAT_TEMP_10},
+{381, CentralHeatingPump, StatusHeizungspumpe, 	 							4, 1, ON_OFF},
+{392, DomesticHotWaterPump, WarmwasserUmwaelzpumpe, 						5, 1, ON_OFF},
+{401, MixerOneCircuitPump, StatusMischerPumpe, 								6, 1, ON_OFF},
+{424, MixerOneCircuitRoomTemperatureSetpoint, RaumTemperaturSoll, 			6, 1, FLOAT_TEMP_10},
+{506, Time, AktuelleZeit, 	 												0, 1, INT_TIME},
+{548, EnergyConsumptionCentralHeating, EnergieaufnahmeProTagInKWh, 			0, 1, P_KWH},
+{873, LegionellaProtectionActivation, LegionellenSchutz, 					4, 1, ON_OFF},
+{987, MixerOneCircuitFlowTemperatureTargetSetpoint, MischerEinsZieltemperatur, 0, 1, FLOAT_TEMP_10},
+{1043, AllengraSensor, DurchflussSensorStd, 								0, 1, FLOAT_LH},
+{1415, MixerOneCircuitOperationState, MischerStatus,  						5, 1, ON_OFF},
+{1769, PrimaryInletTemperatureSensor, VerfluessigerEinlassTemperatur, 		0, 1, FLOAT_TEMP_10},
+{1770, SecondaryOutletTemperatureSensor, RuecklaufTemperatur, 	 			0, 1, FLOAT_TEMP_10},
+{1772, CompressorOilTemperatureSensor, KompressorOelTemperatur, 	 		0, 1, FLOAT_TEMP_10},
+{1775, PrimaryCircuitFanOne, LuefterEinsDrehzahl,  							3, 1, INT_PERC},
+{1776, PrimaryCircuitFanTwo, LuefterZweiDrehzahl,  							3, 1, INT_PERC},
+{2333, EconomizerLiquidTemperatureSensor, FluessigkeitssensorTemperatur, 	0, 1, FLOAT_TEMP_10},
+{2334, EvaporatorVaporTemperatureSensor, VerdampferTemperatur, 				0, 1, FLOAT_TEMP_10},
+{2346, CompressorSpeedPercent, KompressorDrehzahl, 	 						3, 1, INT_PERC},
+{2351, HeatPumpCompressor, WaermepumpeStatus, 	 							4, 1, ON_OFF},
+{2369, HeatPumpCompressorStatistical, KompressorStatistik Starts, 			5, 1, INTEGER},
+{2496, CurrentThermalCapacitySystem, AktuelleHeizleistung,	 				0, 1, P_WATT},
+{0, 0, 0, 0, 0, UNKNOWN}, 
+
