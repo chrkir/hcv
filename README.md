@@ -69,12 +69,22 @@ By default, the adapter processes all available data points. To keep your MQTT b
 
 Only the DIDs specified in this file will be active on the CAN bus, transmitted via MQTT, and displayed in the local web app.
 
+### CAN Bus Logging
+* Integrated CAN bus logging to record and analyze raw network traffic.
+* Supports capturing all bus messages or filtering by specific CAN IDs to easily discover and map new DIDs for custom MQTT messages.
+
+### Data Identifier (DID) Management & Web Interface
+* Structured handling and parsing of Data Identifiers (`vcalobj.did`).
+* Responsive Web UI featuring dedicated help text styling to cleanly separate parameter descriptions from real-time sensor data.
+
 ### File Format (`vcalobj.did`)
 
 The file must be uploaded as a plain text or CSV-like format using the following structure:
 `{ID, Description_Original, Description_Custom, Byte_Position, Display_Flag, DID_TYPE}`
 
-Here is a verified example for a minimal setup (Core temperatures, flowrate, and energy counters):
+Here is a verified example for a minimal setup (Core temperatures, flowrate, and energy counters).
+
+**Note:** New releases may expand the configuration; the file itself is always the source of truth.
 
 ```did
 # ==============================================================================
