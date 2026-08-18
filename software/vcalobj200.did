@@ -1,0 +1,44 @@
+# Objekttabelle basierend auf Vitogate 200 Type EIB (VT200/300GWB Dokumentation)
+# DID/Addr , Definition                   Type ,          Min ,  Max , CAN-ID , Write , PayloadSz
+{ 0x5525,   "OutsideTemperature",         FLOAT_TEMP_10, -600,   600,  0x680,   0,       2 }, // Außentemperatur (-60.0 bis 60.0 °C)
+{ 0x0810,   "BoilerWaterTemperature",     FLOAT_TEMP_10,    0,  1500,  0x680,   0,       2 }, // Kesselwassertemperatur (0-150 °C)
+{ 0x5642,   "FlueGasTemperature",         FLOAT_TEMP_10,    0,  5000,  0x680,   0,       2 }, // Abgastemperatur (0-500 °C)
+# Warmwasser Sensoren (DHW)
+{ 0x0812,   "DHWTemperatureCTS1",         FLOAT_TEMP_10,    0,  1270,  0x680,   0,       2 }, // Warmwassertemp Sensor 1
+{ 0x0814,   "DHWTemperatureCTS2",         FLOAT_TEMP_10,    0,  1270,  0x680,   0,       2 }, // Warmwassertemp Sensor 2
+{ 0x0845,   "CylinderPrimaryPump",        ON_OFF,           0,     1,  0x680,   0,       1 }, // Speicherladepumpe
+{ 0x0846,   "DHWCirculationPump",         ON_OFF,           0,     1,  0x680,   0,       1 }, // Zirkulationspumpe
+# Heizkreis 1 (HC1) Status
+{ 0x2500,   "HC1CurrentOperatingMode",    INTEGER,          0,     3,  0x680,   0,       1 }, // Betriebsmodus (0:Standby, 1:Red, 2:Norm, 3:NormPerm)
+{ 0x0810,   "HC1FlowTemperature",         FLOAT_TEMP_10,    0,  1500,  0x680,   0,       2 }, // Vorlauftemperatur HC1
+{ 0x2906,   "HC1HeatingCircuitPump",      ON_OFF,           0,     1,  0x680,   0,       1 }, // Heizkreispumpe HC1
+{ 0x0896,   "HC1RoomTemperature",         FLOAT_TEMP_10,    0,   640,  0x680,   0,       2 }, // Raumtemperatur Ist HC1
+{ 0x2544,   "HC1SetFlowTemperature",      FLOAT_TEMP_10,    0,  1270,  0x680,   0,       2 }, // Vorlauf-Solltemp HC1
+# Heizkreis 2 (HC2) Status
+{ 0x3500,   "HC2CurrentOperatingMode",    INTEGER,          0,     3,  0x680,   0,       1 }, 
+{ 0x3900,   "HC2FlowTemperature",         FLOAT_TEMP_10,    0,  1500,  0x680,   0,       2 }, 
+{ 0x3906,   "HC2HeatingCircuitPump",      ON_OFF,           0,     1,  0x680,   0,       1 }, 
+{ 0x0898,   "HC2RoomTemperature",         FLOAT_TEMP_10,    0,   640,  0x680,   0,       2 }, 
+{ 0x3544,   "HC2SetFlowTemperature",      FLOAT_TEMP_10,    0,  1270,  0x680,   0,       2 }, 
+# --- Bedienung & Einstellungen HK1 (HC1 Write) ---
+{ 0x2323,   "HC1Mode",                    INTEGER,          0,     4,  0x680,   1,       1 }, // Betriebsart (0:Abschalt, 1:WW, 2:Heizen+WW, 3:Red, 4:Norm)
+{ 0x2306,   "HC1SetRoomTempStandard",     FLOAT_TEMP_10,   30,   370,  0x680,   1,       2 }, // Raum-Soll Normal (3.0 - 37.0 °C)
+{ 0x2307,   "HC1SetRoomTempReduced",      FLOAT_TEMP_10,   30,   370,  0x680,   1,       2 }, // Raum-Soll Reduziert
+{ 0x6300,   "SetDHWTemperature",          FLOAT_TEMP_10,  100,   600,  0x680,   1,       2 }, // Warmwasser-Soll (10.0 - 60.0 °C)
+{ 0x2305,   "HC1HeatingCurveSlope",       FLOAT_TEMP_10,    2,    35,  0x680,   1,       2 }, // Neigung (0.2 bis 3.5)
+{ 0x2304,   "HC1HeatingCurveLevel",       FLOAT_TEMP_10, -130,   400,  0x680,   1,       2 }, // Niveau (-13.0 K bis +40.0 K)
+{ 0x2331,   "HC1EconomyMode",             ON_OFF,           0,     1,  0x680,   1,       1 }, // Sparbetrieb
+{ 0x2330,   "HC1PartyMode",               ON_OFF,           0,     1,  0x680,   1,       1 }, // Partybetrieb
+# --- Laufzeiten & Zähler ---
+{ 0x08A7,   "BurnerHoursStage1",          INTEGER,          0, 1150000,0x680,   0,       4 }, // Betriebsstunden Stufe 1
+{ 0x08AB,   "BurnerHoursStage2",          INTEGER,          0, 1150000,0x680,   0,       4 }, // Betriebsstunden Stufe 2
+{ 0x088A,   "BurnerStarts",               INTEGER,          0, 1150000,0x680,   0,       4 }, // Brennerstarts
+{ 0x0980,   "BurnerStage1State",          ON_OFF,           0,     1,  0x680,   0,       1 }, // Brenner Stufe 1 An/Aus
+{ 0x0981,   "BurnerStage2State",          ON_OFF,           0,     1,  0x680,   0,       1 }, // Brenner Stufe 2 An/Aus
+# Solar
+{ 0x6564,   "SolarCollectorTemperature",  FLOAT_TEMP_10, -500,  2400,  0x680,   0,       2 }, // Kollektortemperatur (-50 bis 240 °C)
+{ 0x6566,   "SolarCylinderTemperature",   FLOAT_TEMP_10,    0,  1270,  0x680,   0,       2 }, // Solarspeichertemperatur
+{ 0x6552,   "SolarCircuitPump",           ON_OFF,           0,     1,  0x680,   0,       1 }, // Solar-Pumpe Status
+{ 0x6568,   "SolarHoursRun",              INTEGER,          0, 64000,  0x680,   0,       2 }, // Solar Betriebsstunden
+{ 0x6560,   "SolarHeatAmount",            INTEGER,          0, 1150000,0x680,   0,       4 }, // Solar Wärmemenge
+{ 0,        "",                           0,                0,     0,      0,   0,       0 }  // Ende
