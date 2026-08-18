@@ -14,6 +14,37 @@ An isolated, passive CAN-bus adapter to fetch local data from Viessmann E3-gener
 
 ---
 
+## 🔀 Supported Series & Target Selection (V200 vs. V250)
+
+This project supports both the **E3 Generation (e.g., Vitocal 250-A, 252-A)** and the **V200/WO1C CAN Protocol (e.g., Vitocal 200-S, 200-A, HCV)** via dedicated software builds.
+
+| Feature / Setting | Vitocal 250 (E3 Series) | Vitocal 200 (HCV / WO1C Series) |
+| :--- | :--- | :--- |
+| **Firmware Target** | Vitocal-250 Build | Vitocal-200 Build |
+| **DID Profile File** | `vcalobj.did` | `vcalobj200.did` |
+| **DID Format** | Decimal (e.g., `881`, `548`) | Hexadecimal (e.g., `0x0371`, `0x0100`) |
+| **Log File** | `canLog250.txt` | `canLog200.txt` |
+| **Bus Protocol** | E3 CAN Specification | WO1C CAN Variant |
+
+---
+
+### Selective DID Profile (`vcalobj200.did`) for Vitocal 200
+
+When using the **Vitocal 200 Firmware**, the DID profile file must be uploaded as `vcalobj200.did`. Addresses correspond strictly to the WO1C / HCV hexadecimal address map:
+
+```did
+# ==============================================================================
+# embdes Viessmann Vitocal 200 / WO1C Custom DID Profile
+# Line comments starting with '#' are fully supported.
+# ==============================================================================
+
+# Core Temperatures & Controls (WO1C Hex Format)
+{0x0100, OutdoorTemp, Aussentemperatur, 0, 1, FLOAT_TEMP_10},
+{0x0371, OperatingMode, Betriebsart, 0, 1, INTEGER},
+{0x0401, MixerPumpState, StatusMischerPumpe, 0, 1, ON_OFF},
+
+```
+
 ## 🛠️ Project Structure & License Model
 
 This project follows a hybrid **Open Hardware / Commercial Software** model to support the community while funding the extensive reverse-engineering work behind the Viessmann CAN protocols.
