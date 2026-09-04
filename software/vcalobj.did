@@ -51,4 +51,5 @@
 { 2346, "CompressorSpeedPercent",                       "KompressorDrehzahl",                3,       INT_PERC,         0,    0, 0x680,    1,     0,       1 },
 { 2351, "HeatPumpCompressor",                           "WaermepumpeKompressorStatus",       4,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
 { 2369, "HeatPumpCompressorStatistical",                "KompressorStartsGesamt",            5,       INTEGER,          0,    0, 0x680,    1,     0,       2 },
+{ 2487, "ElectricalPowerSystem",                        "Aktuelle Elektrische Leistung",     0,       P_WATT,           0,    0, 0x680,    1,     0,       2},
 { 2496, "CurrentThermalCapacitySystem",                 "AktuelleHeizleistung",              0,       P_WATT,           0,    0, 0x680,    1,     0,       2 }
