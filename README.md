@@ -175,6 +175,21 @@ meters:
 
 *Note: The adapter acts as a pure data provider (Push-to-MQTT). No active HTTP polling or writing to the CAN-bus is required or supported.*
 
+---
+
+## Web UI Parameter Control (Write Support)
+
+Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters directly on the Vitocal 250 heating unit without needing external automation scripts or manual MQTT commands.
+
+![HCV Web UI Parameter Control](https://raw.githubusercontent.com/chrkir/hcv/main/images/IMG_1145.PNG)
+
+### Key Features:
+* **Direct Web Control:** Click on writable parameters within the dashboard to bring up the interaction dialog.
+* **Safety & Boundary Checks:** Displays allowed minimum and maximum boundaries (e.g., `Min: 10 | Max: 60` for `WarmwasserSolltemperaturNormal`) defined by `vcalobj.did` to prevent invalid inputs.
+* **DID Transparency:** Clearly displays the active Data Identifier (e.g., `DID: 0x18C`).
+* **Instant Bus Dispatch:** Clicking **Senden** formats and transmits the updated setpoint straight to the Vitocal CAN bus.
+
+---
 
 ## ✉️ Contact & Support
 
