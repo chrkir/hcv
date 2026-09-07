@@ -125,12 +125,13 @@ Here is a verified example for a minimal setup (Core temperatures, flowrate, and
 # ==============================================================================
 
 # Core Temperatures
-{268, OutdoorTemperatureSensor, Aussentemperatur, 0, 1, FLOAT_TEMP_10},
+{268, FlowTemperatureSensor, Vorlauftemperatur, 0, 1, FLOAT_TEMP_10},
+{269, "ReturnTemperatureSensor", "AußeneinheitRücklauftemperatur", ...},
 {271, DomesticHotWaterSensor, WarmwasserTemperatur, 0, 1, FLOAT_TEMP_10},
-{274, FlowTemperatureSensor, Vorlauftemperatur, 0, 1, FLOAT_TEMP_10},
+{274, OutdoorTemperatureSensor, Aussentemperatur, 0, 1, FLOAT_TEMP_10},
 
 # Flowrate & Hydraulics
-{1041, VolumetricFlowrateSensor, DurchflussSensorStd, 0, 1, FLOAT_LH},
+{1043, VolumetricFlowrateSensor, DurchflussSensorStd, 0, 1, FLOAT_LH},
 
 # Energy Dashboard
 {548, EnergyConsumptionPerDay, EnergieaufnahmeProTagInKWh, 0, 1, P_KWH},
@@ -190,6 +191,33 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 * **Instant Bus Dispatch:** Clicking **Senden** formats and transmits the updated setpoint straight to the Vitocal CAN bus.
 
 ---
+
+# Release v1.19.0 – Stability, UI Enhancements & MQTT/Wi-Fi Fixes
+
+This release combines significant core improvements, UI refinements, and stability fixes built over recent iterations (v1.16 to v1.19).
+
+---
+
+## 🛠️ Changelog & What's New
+
+### 🐛 Bug Fixes & Refinement (v1.19)
+* **CAN Data Display:** Fixed an issue introduced in v1.18 where CAN data was not displaying correctly in the interface.
+* **DID Integer Display:** Fixed false DID value formatting and display for integer units.
+
+### 🌐 MQTT & System Stability (v1.18)
+* **Home Assistant Auto-Discovery:** Fixed HA Discovery functionality upon MQTT reconnect, including proper handling of retained messages.
+* **Boot State Display:** Set default DID value display to `--` right after HCV boot until valid data is received.
+* **DID Object Management:** Fixed automatic reloading of DID objects immediately after a new file upload.
+* **Wi-Fi Auto-Reconnect:** Improved Wi-Fi reconnect mechanism by resetting the Wi-Fi channel after a timeout event.
+
+### ⚙️ System Control & Network Configuration (v1.16 – v1.17)
+* **Global Reset:** Added a global system reset function with safe CAN bus deinitialization (`can deinit`).
+* **Wi-Fi Manager:** Reworked Wi-Fi configuration with integrated Access Point (AP) selection.
+
+---
+
+## ⚠️ Upgrade Note
+If you are upgrading from v1.18, updating to **v1.19.0** is strongly recommended to resolve the CAN data display issue.
 
 ## ✉️ Contact & Support
 
