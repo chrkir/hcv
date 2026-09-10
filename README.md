@@ -194,7 +194,7 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 
 # Release v1.19.0 – Stability, UI Enhancements & MQTT/Wi-Fi Fixes
 
-This release combines significant core improvements, UI refinements, and stability fixes built over recent iterations (v1.16 to v1.19).
+This release combines significant core improvements, UI refinements, and stability fixes built over recent iterations (v1.16 to v1.20).
 
 ---
 
