@@ -200,6 +200,18 @@ This release combines significant core improvements, UI refinements, and stabili
 
 ## 🛠️ Changelog & What's New
 
+### Bug Fixes & Stability (v1.20)
+
+* **Critical Wi-Fi Auto-Connect Fix:** Corrected WiFi.begin() parameter passing in auto-select mode, resolving connection issues when BSSID lock is unused.
+* **Wi-Fi 6 (802.11ax) Support:** Explicitly enabled 802.11ax protocol support on ESP32-C6 targets (TARG_V250_C6) to prevent connection timeouts on Wi-Fi 6 routers (e.g., FRITZ!Box AX).
+* **AP Mode Wi-Fi Scanning:** Configured AP mode to run in dual WIFI_AP_STA mode to allow asynchronous scanning of nearby networks during setup.
+* **Watchdog Stability (TWDT Fix):** Offloaded OTA reboot and factory reset operations from the async_tcp task context to prevent Task Watchdog resets.
+
+### New Features & UI Enhancements
+* **SSID Selection Dropdown:** Populates nearby Wi-Fi SSIDs with signal strength indicators (dBm) directly from the scan cache.
+* **Web UI Factory Reset:** Added factory reset trigger into the setup dropdown menu (accessible exclusively in AP mode with safety prompt).
+* **Clean UI Formatting:** Improved active SSID dropdown rendering.
+
 ### 🐛 Bug Fixes & Refinement (v1.19)
 * **CAN Data Display:** Fixed an issue introduced in v1.18 where CAN data was not displaying correctly in the interface.
 * **DID Integer Display:** Fixed false DID value formatting and display for integer units.
