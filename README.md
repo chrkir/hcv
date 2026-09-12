@@ -200,8 +200,10 @@ This release combines significant core improvements, UI refinements, and stabili
 
 ## 🛠️ Changelog & What's New
 
-### Bug Fixes & Stability (v1.20)
+### Enhancements (v1.21)
+* **Multi-Frame DID Support:** Added ISO-TP multi-frame decoding support for long DIDs spanning multiple CAN messages. 
 
+### Bug Fixes & Stability (v1.20)
 * **Critical Wi-Fi Auto-Connect Fix:** Corrected WiFi.begin() parameter passing in auto-select mode, resolving connection issues when BSSID lock is unused.
 * **Wi-Fi 6 (802.11ax) Support:** Explicitly enabled 802.11ax protocol support on ESP32-C6 targets (TARG_V250_C6) to prevent connection timeouts on Wi-Fi 6 routers (e.g., FRITZ!Box AX).
 * **AP Mode Wi-Fi Scanning:** Configured AP mode to run in dual WIFI_AP_STA mode to allow asynchronous scanning of nearby networks during setup.

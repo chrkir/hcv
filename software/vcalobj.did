@@ -6,7 +6,8 @@
 #  der nachfolgende Text ist die original E3-Definition
 #  der zweite Text kann ein beliebiger sein, so z.B. eine Übersetzung in eine eigene Sprache
 #  der vierte Wert definiert die Position in der CAN - Nachricht der zur Anzeige und MQTT
-#  Nachricht übernommen wird
+#  Nachricht übernommen wird. Es gibt E3 Nachrichten die ohne Datenlänge übertragen werden, um
+#  diese anzeigen bzw. verarbeiten zu können muss der die Nacrichten Position auf 255 gesetzt werden.
 #  der fünfte Wert besagt ob der Wert in der HTML Tabelle angezeigt wird und ist der einzige Wert
 #  der geändert werden kann
 #  der sechste Wert bestimmt die Auswertung des aus der CAN-Nachricht gelesen Daten
@@ -25,11 +26,11 @@
 { 282,  "HydraulicSeparatorTemperatureSensor",          "HydraulischeWeicheTemperatur",      0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
 { 284,  "MixerOneCircuitFlowTemperatureSensor",         "MischerVorlauftemperatur",          0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
 { 318,  "WaterPressureSensor",                          "Wasserdruck",                       0,       FLOAT_PRES_10,    0,    0, 0x680,    1,     0,       2 },
-{ 381,  "CentralHeatingPump",                           "HeizungspumpeStatus",               4,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
-{ 392,  "DomesticHotWaterPump",                         "WarmwasserUmwaelzpumpeStatus",      5,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
+{ 381,  "CentralHeatingPump",                           "HeizungspumpeStatus",               0,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
+{ 392,  "DomesticHotWaterPump",                         "WarmwasserUmwaelzpumpeStatus",      2,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
 { 396,  "DomesticHotWaterTemperatureSetpoint",          "WarmwasserSolltemperaturNormal",    6,       FLOAT_TEMP_10,  100,  600, 0x680,    1,     1,       2 },
 { 397,  "DomesticHotWaterTempSetpointTarget",           "WarmwasserSolltemperaturKomfort",   6,       FLOAT_TEMP_10,  100,  650, 0x680,    1,     1,       2 },
-{ 401,  "MixerOneCircuitPump",                          "MischerpumpeStatus",                6,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
+{ 401,  "MixerOneCircuitPump",                          "MischerpumpeStatus",                2,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
 { 402,  "DomesticHotWaterOperatingMode",                "WarmwasserBetriebsmodus",           6,       INTEGER,          0,    2, 0x680,    1,     1,       1 },
 # Direkter Heizkreis 1 (falls kein Mischer vorhanden)
 { 530,  "HeatingCircuitRoomTemperatureSetpoint",        "RaumsolltemperaturHK1Normal",       6,       FLOAT_TEMP_10,  100,  300, 0x680,    1,     1,       2 },
@@ -43,13 +44,14 @@
 { 548,  "EnergyConsumptionCentralHeating",              "EnergieaufnahmeTagHeizung",         0,       P_KWH,            0,    0, 0x680,    1,     0,       2 },
 # SmartGrid / Photovoltaik (0=Normal, 1=Sperre, 2=Einschaltempfehlung(PV), 3=Einschaltbefehl)
 { 881,  "SmartGridOperationMode",                       "SmartGridStatus",                   6,       INTEGER,          0,    3, 0x680,    1,     1,       1 },
-{ 873,  "LegionellaProtectionActivation",               "LegionellenschutzStatus",           4,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
+{ 873,  "LegionellaProtectionActivation",               "LegionellenschutzStatus",           1,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
 { 987,  "MixerOneCircuitFlowTemperatureTargetSetpoint", "MischerZielVorlauftemperatur",      0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
 { 1043, "AllengraSensor",                               "DurchflussmengeStandard",           0,       FLOAT_LH,         0,    0, 0x680,    1,     0,       2 },
-{ 1415, "MixerOneCircuitOperationState",                "MischerStatus",                     5,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
+{ 1415, "MixerOneCircuitOperationState",                "MischerStatus",                     1,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
 { 1770, "SecondaryOutletTemperatureSensor",             "Ruecklauftemperatur",               0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
-{ 2346, "CompressorSpeedPercent",                       "KompressorDrehzahl",                3,       INT_PERC,         0,    0, 0x680,    1,     0,       1 },
-{ 2351, "HeatPumpCompressor",                           "WaermepumpeKompressorStatus",       4,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
-{ 2369, "HeatPumpCompressorStatistical",                "KompressorStartsGesamt",            5,       INTEGER,          0,    0, 0x680,    1,     0,       2 },
-{ 2487, "ElectricalPowerSystem",                        "Aktuelle Elektrische Leistung",     0,       P_WATT,           0,    0, 0x680,    1,     0,       2},
-{ 2496, "CurrentThermalCapacitySystem",                 "AktuelleHeizleistung",              0,       P_WATT,           0,    0, 0x680,    1,     0,       2 }
+{ 2346, "CompressorSpeedPercent",                       "KompressorDrehzahl",                255,     INT_PERC,         0,    0, 0x680,    1,     0,       1 },
+{ 2351, "HeatPumpCompressor",                           "WaermepumpeKompressorStatus",       0,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
+{ 2369, "HeatPumpCompressorStatistical",                "KompressorStartsGesamt",            6,       INTEGER,          0,    0, 0x680,    1,     0,       2 },
+{ 2487, "ElectricalPowerSystem",                        "AktuelleElektrischeLeistung",       0,       P_WATT,           0,    0, 0x680,    1,     0,       2 },
+{ 2496, "CurrentThermalCapacitySystem",                 "AktuelleHeizleistung",              0,       P_WATT,           0,    0, 0x680,    1,     0,       2 },
+{ 0, "", "", 0, 0, 0, 0, 0, 0, 0, 0}
