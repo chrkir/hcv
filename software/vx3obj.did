@@ -1,0 +1,26 @@
+#
+#  Anmerkung: die Daten in der Konfigurationsdatei erlauben eine flexible Anpassung der
+#  angezeigten und als MQTT Topic übertragenen Viessmann E3-Objekte
+#
+#  In der ersten Position wird das vx3 DID-Objekt angegeben
+#  der nachfolgende Text ist die original E3-Definition
+#  der zweite Text kann ein beliebiger sein, so z.B. eine Übersetzung in eine eigene Sprache
+#  der vierte Wert definiert die Position in der CAN - Nachricht der zur Anzeige und MQTT
+#  Nachricht übernommen wird
+#  der sechste Wert bestimmt die Auswertung des aus der CAN-Nachricht gelesen Daten
+#  für die Anzeige und MQTT-Nachrichten und ist durch E3-Spezifikation bestimmt
+#  Der siebte Wert ist das Write-Flag (0 = Nur Lesen, 1 = Schreiben erlaubt)
+#  Der achte Wert ist das Minimum (wird nur bei Write-Flag = 1 geprüft)
+#  Der neunte Wert ist das Maximum (wird nur bei Write-Flag = 1 geprüft)
+#  Eine ID kann von der Verarbeitung per MQTT oder Anzeige durch voransetzen von '#' 
+#  ausgeschlossen werden
+#
+# DID,  E3-Definition,                                  E3 Translation,                      Msg-Pos, Type,          Min,  Max, CAN-ID, DID.idx, Write, Payload
+{ 535,  "StatisticalGridFeedInEnergy", 					"LeistungsabgabeNetzanschluss",      0,       P_KWH,         0,    0,   0x680,   0,      0,       4 },
+{ 535,  "StatisticalGridSuppliedEnergy",   				"LeistungsaufnahmeNetzanschluss",    4,       P_KWH,         0,    0,   0x680,   1,      0,       4 },
+{ 1603, "ActivePower",                                  "AnschlusLeistung",                  0,       P_WATT,        0,    0,   0x680,   0,      0,       2 },
+{ 1664, "ElectricalEnergyStorageStateOfCharge",         "BatterieSoc",                       0,       INT_PERC,      0,    0,   0x680,   0,      0,       1 },
+{ 1690, "ElectricalEnergySystemPhotovoltaicStatus",     "FotovoltaikEinspeisung",            0,       P_WATT,        0,    0,   0x680,   0,      0,       2 },
+{ 1834, "StateOfEnergy",                                "BatterieLadungKh",                  0,       P_WATT,        0,    0,   0x680,   0,      0,       2 },
+{ 1836, "ElectricalEnergyChargeDischarge",              "BatterieLadeEntladeleistung",       0,       P_WATT,        -1,   1,   0x680,   0,      0,       2 },
+{ 0, "", "", 0, UNKNOWN, 0, 0, 0, 0, 0, 0}

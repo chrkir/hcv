@@ -39,8 +39,8 @@
 # Betriebsmodus Heizkreis (0=Standby, 1=Nur WW, 2=Heizen/WW, 3=Dauernd Reduziert, 4=Dauernd Normal)
 { 533,  "HeatingCircuitOperatingMode",                  "HeizkreisBetriebsmodusHK1",         6,       INTEGER,          0,    4, 0x680,    1,     1,       1 },
 # Heizkurve (zur Optimierung via Smart Home)
-{ 534,  "HeatingCurveSlope",                            "HeizkurveNeigungHK1",               6,       FLOAT_TEMP_10,    2,   35, 0x680,    1,     1,       2 },
-{ 535,  "HeatingCurveShift",                            "HeizkurveNiveauHK1",                6,       FLOAT_TEMP_10,-150,   150, 0x680,    1,     1,       2 },
+{ 526,  "HeatingCurveSlope",                            "HeizkurveNeigungHK1",               6,       FLOAT_TEMP_10,    2,   35, 0x680,    1,     1,       2 },
+{ 528,  "HeatingCurveShift",                            "HeizkurveNiveauHK1",                6,       FLOAT_TEMP_10,-150,   150, 0x680,    1,     1,       2 },
 { 548,  "EnergyConsumptionCentralHeating",              "EnergieaufnahmeTagHeizung",         0,       P_KWH,            0,    0, 0x680,    1,     0,       2 },
 # SmartGrid / Photovoltaik (0=Normal, 1=Sperre, 2=Einschaltempfehlung(PV), 3=Einschaltbefehl)
 { 881,  "SmartGridOperationMode",                       "SmartGridStatus",                   6,       INTEGER,          0,    3, 0x680,    1,     1,       1 },
@@ -54,4 +54,4 @@
 { 2369, "HeatPumpCompressorStatistical",                "KompressorStartsGesamt",            6,       INTEGER,          0,    0, 0x680,    1,     0,       2 },
 { 2487, "ElectricalPowerSystem",                        "AktuelleElektrischeLeistung",       0,       P_WATT,           0,    0, 0x680,    1,     0,       2 },
 { 2496, "CurrentThermalCapacitySystem",                 "AktuelleHeizleistung",              0,       P_WATT,           0,    0, 0x680,    1,     0,       2 },
-{ 0, "", "", 0, 0, 0, 0, 0, 0, 0, 0}
+{ 0, "", "", 0, UNKNOWN, 0, 0, 0, 0, 0, 0}
