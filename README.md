@@ -200,10 +200,11 @@ This release combines significant core improvements, UI refinements, and stabili
 
 ## 🛠️ Changelog & What's New
 
+### Hardware 1.6
+* **Changed CAN Line protection**
+
 ### Release v1.25 – Dynamic VX3 DID Engine & Multi-Mode Support
-
 ### 🚀 Key Improvements & Features
-
 * **Dedicated `vx3obj.did` Table File:** Fully decoupled VX3 data points from the standard Vitocal table (`vcalobj.did`).
 * **Three Flexible Operating Modes:**
   1. **Heat Pump Only (without VX3):** Standard operating mode for standalone Vitocal heat pump systems.
@@ -211,10 +212,7 @@ This release combines significant core improvements, UI refinements, and stabili
   3. **VX3 Only (without Heat Pump):** Dedicated mode for standalone Vitocharge storage/inverter installations.
 * **Enhanced DID Engine (v1.25 / v1.24):** Fully dynamic decoding for all payload sizes (1, 2, and 4 bytes) including Big-Endian processing, signed power values (charge/discharge), and 32-bit multi-frame UDS responses (e.g., grid feed-in/consumption meters like DID 535).
 
----
-
 ### 📜 Changelog Summary (v1.22 – v1.25)
-
 * **v1.25:** Improved VX3 mode detection and web display logic.
 * **v1.24:** Added 32-bit integer handling (P_KWH / P_WATT) and improved sign/endianness processing.
 * **v1.23:** Removed page refresh flicker on `httpMain`, corrected write-filter logic (`writeFlg`) for read-only sensor points, and added new VX3 configuration options in the Web UI.
