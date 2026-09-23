@@ -192,13 +192,13 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 
 ---
 
-# Release v1.19.0 – Stability, UI Enhancements & MQTT/Wi-Fi Fixes
-
-This release combines significant core improvements, UI refinements, and stability fixes built over recent iterations (v1.16 to v1.20).
-
----
-
 ## 🛠️ Changelog & What's New
+
+### Release v1.29
+* **Fixed:** Resolved issue with Access Point (AP) mode selection.
+* **Fixed:** Fixed main page rendering and display issues in Google Chrome browsers.
+* **Fixed:** Corrected DID access for CAN ID `0x693` (Display Unit).
+* **Added:** Password visibility toggle in the WebUI configuration panel.
 
 ### Hardware 1.6
 * **Changed CAN Line protection**
