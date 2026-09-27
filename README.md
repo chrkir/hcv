@@ -194,6 +194,16 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 
 ## 🛠️ Changelog & What's New
 
+### 🆕 New: HCV Ethernet & WLAN Edition
+
+In addition to the Wi-Fi-only version, the **HCV Ethernet Edition** is now available.
+
+* 🔌 **Dual Connectivity (LAN & Wi-Fi):** Connect either via a standard RJ45 Ethernet network cable or Wi-Fi.
+* 📶 **Ideal for Basement Installations:** Maximum stability and reliability – even in utility rooms with poor Wi-Fi reception.
+* ⚡ **Same Full Feature Set:** Full support for all CAN data points, Home Assistant Auto-Discovery, and 100% cloud-free local operation.
+
+> 📦 **Availability:** The Ethernet Edition will start shipping on **October 1th** and can be pre-ordered now: [View Options on embdes.com](https://embdes.com/hcv_d)
+
 ### Release v1.29
 * **Fixed:** Resolved issue with Access Point (AP) mode selection.
 * **Fixed:** Fixed main page rendering and display issues in Google Chrome browsers.
