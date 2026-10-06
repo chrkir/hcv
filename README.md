@@ -194,15 +194,23 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 
 ## 🛠️ Changelog & What's New
 
-### 🆕 New: HCV Ethernet & WLAN Edition
+### Release v1.33
+* **Added:**&emsp; Expanded Telnet terminal functions and command handling for remote diagnostics.
+* **Added:**&emsp; Dedicated logging for MQTT connection status and WiFi disconnect reason codes.
+* **Improved:**&emsp; Enhanced WiFi stability and compatibility with modern routers (PMF handling & disabled modem-sleep).
+* **Improved:**&emsp; Reliability of NTP time synchronization across network interfaces.
+* **Fixed:**&emsp; Cold-boot panic crash (`ESP_RST_PANIC`) during W5500 Ethernet initialization with plugged cable.
+* **Fixed:**&emsp; Byte-alignment offset issue causing incorrect IP address rendering ("IP address all equal").
+* **Fixed:**&emsp; Telnet session lifecycle and socket handling for the Ethernet variant.
+* **Fixed:**&emsp; Relative boot timestamp calculations and log message update frequency.
+
+### 🆕 New: HCV Ethernet & WLAN Edition - Release 1.30
 
 In addition to the Wi-Fi-only version, the **HCV Ethernet Edition** is now available.
 
 * 🔌 **Dual Connectivity (LAN & Wi-Fi):** Connect either via a standard RJ45 Ethernet network cable or Wi-Fi.
 * 📶 **Ideal for Basement Installations:** Maximum stability and reliability – even in utility rooms with poor Wi-Fi reception.
 * ⚡ **Same Full Feature Set:** Full support for all CAN data points, Home Assistant Auto-Discovery, and 100% cloud-free local operation.
-
-> 📦 **Availability:** The Ethernet Edition will start shipping on **October 1th** and can be pre-ordered now: [View Options on embdes.com](https://embdes.com/hcv_d)
 
 ### Release v1.29
 * **Fixed:** Resolved issue with Access Point (AP) mode selection.
