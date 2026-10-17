@@ -191,8 +191,35 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 * **Instant Bus Dispatch:** Clicking **Senden** formats and transmits the updated setpoint straight to the Vitocal CAN bus.
 
 ---
+<br><br><br>
 
-## 🛠️ Changelog & What's New
+# 🛠️ Changelog & What's New
+<br>
+
+## Release v1.38
+
+Comprehensive stability update focusing on Wi-Fi connection resilience, LwIP stack crash prevention, and UI setup flexibility.
+
+## Key Improvements & Fixes
+
+* **Active Wi-Fi Watchdog & Auto-Recovery:**
+  * Integrated background monitoring for Wi-Fi connection state.
+  * Periodically retries connection every 15 seconds if disconnected.
+  * Triggers an automatic system reboot (`ESP.restart()`) after 5+ minutes of continuous disconnection (e.g., during night-time router/repeater reboots) to guarantee clean re-association with the AP.
+
+* **Deterministic Network Mode:**
+  * **Ethernet Mode:** PHY initializes on boot and strictly waits for cable connection and DHCP IP lease. Prevents unintended fallback to Wi-Fi. Supports hot-plugging.
+  * **Wi-Fi Mode:** Connects strictly to the configured Wi-Fi network.
+
+* **LwIP Stack & Crash Prevention (`mbox` Fix):**
+  * Optimized initialization sequence in `startNetwork()`.
+  * `WiFi.mode(WIFI_STA)` is invoked at the very start to ensure LwIP mailboxes and tasks are fully operational before launching CAN bus tasks, WebServer, or MQTT sockets.
+
+* **Flexible Wi-Fi Pre-Configuration (Web UI):**
+  * Replaced static select dropdown with a free-text `<input>` linked to an HTML5 `<datalist>`.
+  * Allows manual SSID entry in Ethernet mode to pre-configure Wi-Fi credentials without requiring an active Wi-Fi scan.
+
+---
 
 ### Release v1.33
 * **Added:**&emsp; Expanded Telnet terminal functions and command handling for remote diagnostics.
@@ -284,3 +311,57 @@ If you want to buy a pre-assembled board or a software license, please contact m
 - [Dokumentation](https://github.com/chrkir/hcv/tree/main/docu)
 - [Hardware Ordner](https://github.com/chrkir/hcv/tree/main/hardware)
 - [Software Ordner](https://github.com/chrkir/hcv/tree/main/software)
+
+
+
+
+
+### Update-Info: Modulare DID-Auswahl & Einbindung eigener DIDs
+
+Dieses Update passt die DID-Verarbeitung im HCV-Adapter direkt an die individuelle Ausstattung der jeweiligen Vitocal-Anlage an.
+
+---
+
+#### 1. Abbildung der eigenen Vitocal-Konfiguration
+
+Die zentrale DID-Tabelle (`vcalobj.did`) deckt verschiedene Anlagentypen und Erweiterungen ab. Über das Web-Interface unter **Optionen** lässt sich die Konfiguration exakt auf die tatsächlich verbauten Komponenten einstellen:
+
+* **[BASE]**: Grundfunktionen (Außentemperatur, Vorlauf, Systemdruck, Verdichter)
+* **[HK1] / [HK2] / [HK3]**: Heiz- und Mischerkreise
+* **[DHW]**: Warmwasserbereitung und Zirkulation
+* **[BUFFER]**: Pufferspeicher
+* **[PV_VX3]**: Photovoltaik & Vitocharge VX3
+* **[SOLAR]**: Solaranlage
+
+**Ablauf:** Im Web-Interface werden nur die Haken bei den Modulen gesetzt, die in der eigenen Heizung vorhanden sind. Der Adapter liest daraufhin ausschließlich diese Datenpunkte in den Speicher ein.
+
+---
+
+#### 2. Eigene DIDs und Update-Sicherheit (`user.did`)
+
+Um eigene Anpassungen bei Updates der Standard-Tabelle nicht zu verlieren, ist die Konfiguration getrennt:
+
+* **Standard-Datei (`vcalobj.did`)**: Enthält die vom Adapter mitgelieferten Viessmann-DIDs.
+* **Eigene Datei (`user.did`)**: Enthält benutzerdefinierte DIDs in der Sektion `[USER]`.
+
+Beim Aktualisieren der `vcalobj.did` bleibt die `user.did` auf dem Gerät erhalten. Der Adapter lädt beim Start die ausgewählten Standard-Sektionen und hängt die Einträge aus der `user.did` an.
+
+---
+
+#### 3. Funktionsweise im Hintergrund
+
+* **Upload:** Beim Hochladen einer `.did`-Datei wird der Inhalt einmalig in eine Binärdatei auf dem Gerät umgewandelt (`/vobjects.dat` bzw. `/uobjects.dat`).
+* **Systemstart:** Das zeilenweise Einlesen und Zerlegen von Textzeilen entfällt. Der Adapter lädt die gefilterten Datenblöcke direkt in den Arbeitsspeicher.
+
+---
+
+### Kurzanleitung zur Einrichtung
+
+1. `vcalobj.did` im Web-Interface hochladen.
+2. Unter **Optionen** die Sektionen aktivieren, die in der eigenen Vitocal verbaut sind.
+3. Eigene DIDs (falls vorhanden) in der Datei `user.did` unter `[USER]` ablegen und hochladen:
+```ini
+[USER]
+{ 9999, "CustomSensor", "Mein_Eigener_Wert", 0, FLOAT_TEMP_10, 0, 0, 0x680, 1, 0, 2 }
+
+```
