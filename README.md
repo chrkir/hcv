@@ -196,6 +196,35 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 # 🛠️ Changelog & What's New
 <br>
 
+## Release v1.41 – Smart Connector Assignment, Transparent VX3 DID Allocation & Ethernet Rescue Mode
+
+This release introduces a streamlined, connector-driven DID management architecture, transparent Vitocharge VX3 integration, and solidifies the Early-Boot Ethernet Rescue Mode for reliable recovery.
+**What’s New in v1.41**
+* Smart Connector-Driven DID Assignment
+    Connector Selection: Added a dedicated CAN Connector dropdown (Stecker 72 vs. Stecker 91) in the Web UI (/options).
+  * Stecker 72 (Internal Refrigerant Circuit CAN): Tailored for local heat pump sensors & circuit modules.
+  * Stecker 91 (System CAN Bus): Used for system-wide metrics and external device integration.
+
+    Dynamic UI Form Adaptation: Selecting Stecker 91 automatically hides module-specific checkboxes (Heizkreis 1–3, DHW, Buffer) in the frontend to prevent invalid or conflicting configuration options.
+
+* Transparent Vitocharge VX3 / PV Integration
+  * Removed UI Clutter: The standalone VX3 / c_pv checkbox has been removed from the frontend UI.
+  * Unified Object Storage: Vitocharge VX3 DIDs are now natively embedded within the core /vobjects.dat file.
+  * Automatic Backend Activation: When Stecker 91 is selected, the firmware automatically injects the CAT_VX3 bit (0x0040 / Bit 64) into the active object bitmask (activeMask) during loadVcalObjDat(). PV, battery, and inverter metrics are loaded seamlessly without requiring user intervention.
+
+* Early-Boot Ethernet Rescue Mode (Hot-Plug Recovery)
+  * Deterministic Network Modes: Strict separation between Ethernet (netMode = 0) and Wi-Fi (netMode = 1). No unexpected fallback switching.
+
+    Bootloop & Freeze Prevention: If a corrupted or oversized custom .did file prevents the device from starting, trigger the rescue mode via hot-plug:
+
+        Unplug the Ethernet cable.
+
+        Power-cycle the HCV module.
+
+        Re-plug the Ethernet cable within 10 seconds of cold boot.
+
+    Safe Recovery Environment: The device enters Rescue Mode ([http://hcv.local](http://hcv.local) and Telnet on Port 23). Custom user DID files (/uobjects.dat) are completely bypassed, allowing web/FTP/Telnet access to delete or repair damaged files.
+
 ## Release v1.38
 
 Comprehensive stability update focusing on Wi-Fi connection resilience, LwIP stack crash prevention, and UI setup flexibility.

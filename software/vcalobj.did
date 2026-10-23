@@ -19,35 +19,16 @@
 #  ausgeschlossen werden
 #
 # DID,  E3-Definition,                                  E3 Translation,                      Msg-Pos, Type,          Min,  Max, CAN-ID, Disp, Write, Payload
-{ 271,  "DomesticHotWaterSensor",                       "WarmwasserTemperatur",              0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
+# ==============================================================================
+# BASE / SYSTEM (Immer aktiv: Basis-Sensoren, Kompressor, Leistung, Druck)
+# ==============================================================================
+[BASE]
 { 274,  "OutsideTemperatureSensor",                     "Aussentemperatur",                  0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
 { 268,  "FlowTemperatureSensor",                        "Vorlauftemperatur",                 0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
 { 269,  "ReturnTemperatureSensor",                      "AusseneinheitRuecklauftemperatur",  0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
 { 282,  "HydraulicSeparatorTemperatureSensor",          "HydraulischeWeicheTemperatur",      0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
-{ 284,  "MixerOneCircuitFlowTemperatureSensor",         "MischerVorlauftemperatur",          0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
 { 318,  "WaterPressureSensor",                          "Wasserdruck",                       0,       FLOAT_PRES_10,    0,    0, 0x680,    1,     0,       2 },
-{ 381,  "CentralHeatingPump",                           "HeizungspumpeStatus",               0,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
-{ 392,  "DomesticHotWaterPump",                         "WarmwasserUmwaelzpumpeStatus",      2,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
-{ 396,  "DomesticHotWaterTemperatureSetpoint",          "WarmwasserSolltemperaturNormal",    6,       FLOAT_TEMP_10,  100,  600, 0x680,    1,     1,       2 },
-{ 397,  "DomesticHotWaterTempSetpointTarget",           "WarmwasserSolltemperaturKomfort",   6,       FLOAT_TEMP_10,  100,  650, 0x680,    1,     1,       2 },
-{ 401,  "MixerOneCircuitPump",                          "MischerpumpeStatus",                2,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
-{ 402,  "DomesticHotWaterOperatingMode",                "WarmwasserBetriebsmodus",           6,       INTEGER,          0,    2, 0x680,    1,     1,       1 },
-# Direkter Heizkreis 1 (falls kein Mischer vorhanden)
-{ 530,  "HeatingCircuitRoomTemperatureSetpoint",        "RaumsolltemperaturHK1Normal",       6,       FLOAT_TEMP_10,  100,  300, 0x680,    1,     1,       2 },
-{ 531,  "HeatingCircuitRoomTempSetpointComfort",        "RaumsolltemperaturHK1Komfort",      6,       FLOAT_TEMP_10,  150,  300, 0x680,    1,     1,       2 },
-{ 532,  "HeatingCircuitRoomTempSetpointReduced",        "RaumsolltemperaturHK1Reduziert",    6,       FLOAT_TEMP_10,   30,  200, 0x680,    1,     1,       2 },
-# Betriebsmodus Heizkreis (0=Standby, 1=Nur WW, 2=Heizen/WW, 3=Dauernd Reduziert, 4=Dauernd Normal)
-{ 533,  "HeatingCircuitOperatingMode",                  "HeizkreisBetriebsmodusHK1",         6,       INTEGER,          0,    4, 0x680,    1,     1,       1 },
-# Heizkurve (zur Optimierung via Smart Home)
-{ 526,  "HeatingCurveSlope",                            "HeizkurveNeigungHK1",               6,       FLOAT_TEMP_10,    2,   35, 0x680,    1,     1,       2 },
-{ 528,  "HeatingCurveShift",                            "HeizkurveNiveauHK1",                6,       FLOAT_TEMP_10,-150,   150, 0x680,    1,     1,       2 },
-{ 548,  "EnergyConsumptionCentralHeating",              "EnergieaufnahmeTagHeizung",         0,       P_KWH,            0,    0, 0x680,    1,     0,       2 },
-# SmartGrid / Photovoltaik (0=Normal, 1=Sperre, 2=Einschaltempfehlung(PV), 3=Einschaltbefehl)
-{ 881,  "SmartGridOperationMode",                       "SmartGridStatus",                   6,       INTEGER,          0,    3, 0x680,    1,     1,       1 },
-{ 873,  "LegionellaProtectionActivation",               "LegionellenschutzStatus",           1,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
-{ 987,  "MixerOneCircuitFlowTemperatureTargetSetpoint", "MischerZielVorlauftemperatur",      0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
 { 1043, "AllengraSensor",                               "DurchflussmengeStandard",           0,       FLOAT_LH,         0,    0, 0x680,    1,     0,       2 },
-{ 1415, "MixerOneCircuitOperationState",                "MischerStatus",                     1,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
 { 1770, "SecondaryOutletTemperatureSensor",             "Ruecklauftemperatur",               0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
 { 2346, "CompressorSpeedPercent",                       "KompressorDrehzahl",                255,     INT_PERC,         0,    0, 0x680,    1,     0,       1 },
 { 2351, "HeatPumpCompressor",                           "WaermepumpeKompressorStatus",       0,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
@@ -55,4 +36,84 @@
 { 2486, "CurrentElectricalPowerConsumptionRefrigerantCircuit", "ElektrischeLeistung",        0,       P_WATT,           0,    0, 0x680,    0,     0,       4 },
 { 2487, "ElectricalPowerSystem",                        "AktuelleElektrischeLeistung",       0,       P_WATT,           0,    0, 0x680,    1,     0,       4 },
 { 2496, "CurrentThermalCapacitySystem",                 "AktuelleHeizleistung",              0,       P_WATT,           0,    0, 0x680,    1,     0,       4 },
+
+# ==============================================================================
+# WARMWASSER (DHW - Domestic Hot Water)
+# ==============================================================================
+[DHW]
+{ 271,  "DomesticHotWaterSensor",                       "WarmwasserTemperatur",              0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
+{ 392,  "DomesticHotWaterPump",                         "WarmwasserUmwaelzpumpeStatus",      2,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
+{ 396,  "DomesticHotWaterTemperatureSetpoint",          "WarmwasserSolltemperaturNormal",    6,       FLOAT_TEMP_10,  100,  600, 0x680,    1,     1,       2 },
+{ 397,  "DomesticHotWaterTempSetpointTarget",            "WarmwasserSolltemperaturKomfort",   6,       FLOAT_TEMP_10,  100,  650, 0x680,    1,     1,       2 },
+{ 402,  "DomesticHotWaterOperatingMode",                "WarmwasserBetriebsmodus",           6,       INTEGER,          0,    2, 0x680,    1,     1,       1 },
+{ 873,  "LegionellaProtectionActivation",               "LegionellenschutzStatus",           1,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
+
+# ==============================================================================
+# HEIZKREIS 1 (HK1 - Direktkreis oder Mischerkreis 1)
+# ==============================================================================
+[HK1]
+{ 530,  "HeatingCircuitRoomTemperatureSetpoint",        "RaumsolltemperaturHK1Normal",       6,       FLOAT_TEMP_10,  100,  300, 0x680,    1,     1,       2 },
+{ 531,  "HeatingCircuitRoomTempSetpointComfort",        "RaumsolltemperaturHK1Komfort",      6,       FLOAT_TEMP_10,  150,  300, 0x680,    1,     1,       2 },
+{ 532,  "HeatingCircuitRoomTempSetpointReduced",        "RaumsolltemperaturHK1Reduziert",    6,       FLOAT_TEMP_10,   30,  200, 0x680,    1,     1,       2 },
+# Betriebsmodus Heizkreis (0=Standby, 1=Nur WW, 2=Heizen/WW, 3=Dauernd Reduziert, 4=Dauernd Normal)
+{ 533,  "HeatingCircuitOperatingMode",                  "HeizkreisBetriebsmodusHK1",         6,       INTEGER,          0,    4, 0x680,    1,     1,       1 },
+# Heizkurve (zur Optimierung via Smart Home)
+{ 526,  "HeatingCurveSlope",                            "HeizkurveNeigungHK1",               6,       FLOAT_TEMP_10,    2,   35, 0x680,    1,     1,       2 },
+{ 528,  "HeatingCurveShift",                            "HeizkurveNiveauHK1",                6,       FLOAT_TEMP_10,-150,  150, 0x680,    1,     1,       2 },
+{ 381,  "CentralHeatingPump",                           "HeizungspumpeStatus",               0,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
+{ 548,  "EnergyConsumptionCentralHeating",              "EnergieaufnahmeTagHeizung",         0,       P_KWH,            0,    0, 0x680,    1,     0,       2 },
+
+{ 284,  "MixerOneCircuitFlowTemperatureSensor",         "MischerVorlauftemperatur",          0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
+{ 401,  "MixerOneCircuitPump",                          "MischerpumpeStatus",                2,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
+{ 987,  "MixerOneCircuitFlowTemperatureTargetSetpoint", "MischerZielVorlauftemperatur",      0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
+{ 1415, "MixerOneCircuitOperationState",                "MischerStatus",                     1,       ON_OFF,           0,    0, 0x680,    1,     0,       1 },
+
+# ==============================================================================
+# HEIZKREIS 2 (HK2 - Mischerkreis 2)
+# ==============================================================================
+[HK2]
+{ 500,  "HeatingCircuit2RoomTemperatureDesired",        "RaumsolltemperaturHK2Normal",       6,       FLOAT_TEMP_10,  100,  300, 0x680,    1,     1,       2 },
+{ 502,  "HeatingCircuitRoomTempSetpointComfort",        "RaumsolltemperaturHK2Komfort",      6,       FLOAT_TEMP_10,  150,  300, 0x680,    1,     1,       2 },
+{ 501,  "HeatingCircuit2RoomTemperatureReducedDesired", "RaumsolltemperaturHK2Reduziert",    6,       FLOAT_TEMP_10,   30,  200, 0x680,    1,     1,       2 },
+{ 503,  "HeatingCircuit2OperatingMode",                 "HeizkreisBetriebsmodusHK2",         6,       INTEGER,          0,    4, 0x680,    1,     1,       1 },
+{ 504,  "HeatingCircuit2HeatingCurveSlope",             "HeizkurveNeigungHK2",               6,       FLOAT_TEMP_10,    2,   35, 0x680,    1,     1,       2 },
+{ 507,  "HeatingCircuit2FlowTemperature",		        "Mischer2Vorlauftemperatur",         0,       FLOAT_TEMP_10,    0,    0, 0x680,    1,     0,       2 },
+
+# ==============================================================================
+# HEIZKREIS 3 (HK3 - Mischerkreis 3)
+# ==============================================================================
+[HK3]
+
+# ==============================================================================
+# PUFFERSPEICHER (BUFFER)
+# ==============================================================================
+[BUFFER]
+
+# ==============================================================================
+# PHOTOVOLTAIK & VITOCHARGE VX3 (PV_VX3)
+# ==============================================================================
+[PV_VX3]
+{ 535,  "StatisticalGridFeedInEnergy", 					"LeistungsabgabeNetzanschluss",      0,       P_KWH,         0,    0,   0x680,   0,      0,       4 },
+{ 535,  "StatisticalGridSuppliedEnergy",   				"LeistungsaufnahmeNetzanschluss",    4,       P_KWH,         0,    0,   0x680,   1,      0,       4 },
+{ 1603, "PointOfCommonCouplingPower",                   "NetzanschlussLeistungPCC",          0,       P_WATT,    	-1, 	1, 0x680, 0, 0, 2 },
+{ 1664, "ElectricalEnergyStorageStateOfCharge",         "BatterieLadezustandSoC",            0, 	  P_PERCENT, 	-1, 	1, 0x680, 0, 0, 2 },
+{ 1690, "ElectricalEnergySystemPhotovoltaicStatus",     "PhotovoltaikGesamtleistung",        0, 	  P_WATT,    	-1, 	1, 0x680, 0, 0, 2 },
+{ 1801, "ElectricalEnergyStorageEnergyTransferStatistic", "BatterieEnergieStatistik",        0, 	  P_WH,      	-1, 	1, 0x680, 0, 0, 2 },
+{ 1802, "EnergyProductionPhotovoltaic",                  "PhotovoltaikErzeugungsstatistik",  0, 	  P_WH,      	-1, 	1, 0x680, 0, 0, 2 },
+{ 1827, "InverterElectricalEnergyStorMaxNomChargePower", "MaxNennLadeleistung",              0,  	  P_WATT,    	-1, 	1, 0x680, 0, 0, 2 },
+{ 1828, "InverterElectricalEnergyStorageCurrMaxChargePwr","AktuelleMaxLadeleistung",         0, 	  P_WATT,    	-1, 	1, 0x680, 0, 0, 2 },
+{ 1829, "InverterElectricalEnergyStorageMaxNomDiscPower","MaxNennEntladeleistung",           0, 	  P_WATT,    	-1, 	1, 0x680, 0, 0, 2 },
+{ 1830, "InverterElectricalEnergyStorageCurrMaxDiscPower","AktuelleMaxEntladeleistung",      0, 	  P_WATT,    	-1, 	1, 0x680, 0, 0, 2 },
+{ 1831, "PhotovoltaicCurrentStringPower",                "PhotovoltaikStringLeistung",       0, 	  P_WATT,    	-1, 	1, 0x680, 0, 0, 2 },
+{ 1832, "PhotovoltaicStringCurrent",                     "PhotovoltaikStringStrom",          0, 	  P_AMPERE,  	-1, 	1, 0x680, 0, 0, 2 },
+{ 1833, "PhotovoltaicStringVoltage",                     "PhotovoltaikStringSpannung",       0, 	  P_VOLT,    	-1, 	1, 0x680, 0, 0, 2 },
+{ 1834, "ElectricalEnergyStorageStateOfEnergy",          "BatterieSpeicherenergieSoE",       0,  	  P_WH,      	-1, 	1, 0x680, 0, 0, 2 },
+{ 1836, "ElectricalEnergyChargeDischarge",               "BatterieLadeEntladeleistung",      0, 	  P_WATT,    	-1, 	1, 0x680, 0, 0, 2 },
+
+
+# ==============================================================================
+# SOLARTHERMIE (SOLAR)
+# ==============================================================================
+[SOLAR]
+# Ende der Master-DID Liste
 { 0, "", "", 0, UNKNOWN, 0, 0, 0, 0, 0, 0}
