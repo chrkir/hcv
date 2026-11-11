@@ -1,0 +1,8 @@
+# ==============================================================================
+# BENUTZERDEFINIERTE DIDs (user.did)
+# Eigenes Setup / Diagnosewerte / Zusatzkomponenten (z.B. Lüftung)
+# ==============================================================================
+# DID,  E3-Definition,                                  E3 Translation,                      Msg-Pos, Type,          Min,  Max, CAN-ID, Disp, Write, Payload
+# Ergänzende Kältekreis-Diagnosewerte (z.B. für detailliertes Monitoring)
+[USER]
+{ 1598, "SolarStaticTemperatureControlHysteresis", "SolarStatistik",                  0,   INTEGER,          0,    4, 0x680,   1,   1,   1 },

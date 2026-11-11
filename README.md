@@ -53,7 +53,7 @@ This project follows a hybrid **Open Hardware / Commercial Software** model to s
 All hardware files are open-source. You can find the schematics, PCB layout files (KiCAD/EasyEDA), Bill of Materials (BOM), and a 3D-printable enclosure STL file in the `/hardware` folder. Feel free to DIY and order your own boards.
 
 ### 2. Pre-Assembled Hardware (Optional)
-If you do not want to solder SMD components or lack the equipment, you can buy a fully assembled and tested hardware unit inside its enclosure directly from me for **approx. €35 + MwSt ** (plus shipping from Germany). 
+If you do not want to solder SMD components or lack the equipment, you can buy a fully assembled and tested hardware unit inside its enclosure directly from me for **approx. €35 + MwSt ** (plus shipping from Germany). processDidData
 
 ### 3. Firmware & Software License
 - **Demo Version (Free):** Includes the local Wi-Fi/MQTT captive portal captive setup, hardware connection test, and displays your unique ESP32 Chip ID.
@@ -195,6 +195,52 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 
 # 🛠️ Changelog & What's New
 <br>
+
+
+## Release V1.48 – Multi-Adapter Support & Memory Alignment Fixes & Maintenace updates
+
+### New Features & Enhancements
+
+* **Multi-HCV Support (Multi-Device Networking):**  
+  Introduced the configurable `Device Id` field (Default: `HCV`). Enables running multiple HCV adapters concurrently on the same MQTT broker without topic overlapping or Home Assistant entity collisions.
+
+* **Dynamic Home Assistant Discovery & Topic Mapping:**  
+  The `deviceId` dynamically maps into Home Assistant Discovery payloads (`uniq_id`, `dev.ids`, entity names) as well as base MQTT publish/subscribe topics.
+
+* **Configuration Backup and Restore:**
+  Restructured "Einstellungen" into a sub-dropdown menu (`Optionen`, `Konfiguration sichern`, `Konfiguration laden`) to allow the HCV-Configuration Data to save and restore from local PC.
+
+---
+
+### Bug Fixes & Stability Improvements
+
+* **Memory Alignment & CPU Panic Fix:**  
+  Resolved hardware exception crashes on Xtensa LX6 architecture caused by unaligned 32-bit access in packed structures (`enabledCategories`, IP address fields).
+
+* **MQTT Payload Null-Termination:**  
+  Ensured proper string null-termination (`\0`) on all incoming MQTT payloads prior to logging or execution routines.
+
+* **CAN Port 91 (PV/VX3) DID Isolation:** Fixed `loadVcalObjDat()` active mask logic. Selecting Port 91 now strictly isolates `CAT_PV_VX3` (0x0040) objects, preventing baseline heat pump DIDs from loading.
+
+* **RAM Object Reset:** Added `memset` array clearing in `loadVcalObjDat()` prior to DID parsing to prevent stale default DIDs from persisting in RAM.
+
+* **Active Polling:** Fixed condition evaluation in the VX3 polling task for active request frames on CAN ID `0x441`.
+
+* **CAN-ID Filter Fix (0x690 → 0x451):** In previous firmware versions (including V1.43), canMsgHandler and the smart polling task incorrectly filtered for CAN-ID 0x690.
+
+* **Impact:** UDS diagnostic responses from the Vitocharge VX3 / auxiliary CAN on Plug 91 are transmitted on CAN-ID 0x451 (as positive responses to requests sent to 0x441). The invalid filter caused incoming VX3 payload frames to be discarded and broke passive master detection.
+
+---
+
+### 📑 Migration & Upgrade Instructions
+
+1. **OTA Update:** Flash the `v1.45` binary via Web-UI or PlatformIO OTA.
+2. **Single Adapter Setup:** No action required. The adapter boots with default `deviceId` (`Vitocal-CAN`) and resumes standard operation.
+3. **Multi-Adapter Setup:**
+   * Open the web interface (`http://<ADAPTER_IP>/options`).
+   * Update **Device ID** to a unique identifier (e.g., `Vitocal-EG`, `Vitocal-OG`).
+   * Click **Save & Reboot**.
+
 
 ## Release v1.41 – Smart Connector Assignment, Transparent VX3 DID Allocation & Ethernet Rescue Mode
 
