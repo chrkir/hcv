@@ -196,6 +196,9 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 # 🛠️ Changelog & What's New
 <br>
 
+## Release V1.49 – Fix for broken DID control in Release 1.48
+
+# sorry for the inconvenience
 
 ## Release V1.48 – Multi-Adapter Support & Memory Alignment Fixes & Maintenace updates
 
