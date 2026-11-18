@@ -1,5 +1,4 @@
-﻿# Viessmann Vitocal (E3) CAN-Bus to MQTT Bridge with Home Assistant Support
-
+﻿v
 ## Please also read the HCV Description in the docu folder.
 
 An isolated, passive CAN-bus adapter to fetch local data from Viessmann E3-generation heat pumps (e.g., Vitocal 250-A, 252-A) and stream it via Wi-Fi to MQTT with native Home Assistant Auto-Discovery.
@@ -196,9 +195,22 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 # 🛠️ Changelog & What's New
 <br>
 
-## Release V1.49 – Fix for broken DID control in Release 1.48
+## Firmware V1.50 – Stability, CAN-E3 Parser Hardening & E3onCAN DID Alignment
 
-# sorry for the inconvenience
+## Highlights & New Features
+- **Compressor Electrical Power Calculation Re-enabled (`ENAB_POWER_CALC`):** Restored internal electrical power estimation (`ElektrischeLeistung`) for systems without an external energy meter, using real-time compressor speed (`DID 2569`, fixed 1:1 RPS scaling) and outdoor temperature (`DID 274`).
+
+## Bug Fixes & Stability Improvements
+- **Eliminated `1,431,655.77 kW` Power Spikes (`DID 2496` & 32-bit Padding Filter):** Added a centralized element-width (`1`, `2`, `4` bytes) bounds and CAN padding-byte filter (`0x55` / `0x5555` / `0x55555555`, `0xAA...`, `0xFF...`, `0x7F...`) in `processDidData()`. Invalid padding frames sent by Vitocal 250-A units are now discarded while preserving the last valid sensor reading.
+- **Fixed Negative Temperature Parsing (`FLOAT_TEMP_10`):** Corrected signed 16-bit casting and `0xFFFF` handling so sub-zero temperatures (below `0 °C`, including `-0.1 °C`) are accurately decoded instead of being rejected or miscalculated.
+
+## `vcalobj.did` Configuration Updates (E3onCAN Alignment)
+> **Note:** Update your `vcalobj.did` (UNIX `LF` line endings) to apply the corrected DID mappings and payload offsets:
+- **`[BASE]`:** Fixed `DID 2369` (`HeatPumpCompressorStatistical` / compressor starts) payload offset (`0` instead of `6`) and 32-bit length (`4` bytes), cleaned up `DID 2346` (`Msg-Pos = 0`), and enabled `Disp = 1` for core system sensors (`274`, `268`, `269`, `282`, `318`, `1043`, `1770`, `2346`, `2351`, `2369`, `2486`–`2488`, `2496`, `2569`).
+- **`[HK1]`:** Removed non-existent E3onCAN DIDs (`530`, `532`), mapped normal room setpoint to `DID 424` (`HeatingCircuitRoomTemperatureSetpoint`), corrected `Msg-Pos = 0` on `DID 531`, and aligned `DID 526` (heating curve slope) and `DID 528` (heating curve level).
+- **`[HK2]`:** Replaced invalid DIDs (`500`–`507`) with verified E3onCAN Heating Circuit 2 DIDs (`425` room setpoint, `397` operating mode, `527` heating curve slope, `529` heating curve level, `286` flow temperature, `332` mixer 2 flow temperature, `402` mixer 2 pump) with `Msg-Pos = 0`.
+- **`[DHW]`:** Corrected `Msg-Pos = 0` on `DID 392` (`DomesticHotWaterPump`), `DID 396` (`DomesticHotWaterTemperatureSetpoint`), and `DID 873` (`LegionellaProtectionActivation`); removed misplaced `DID 397` and moved `DID 402` to `[HK2]`.
+- **24-Byte Energy Consumption Structs (`DID 548` & `DID 565`):** Verified `Int32` Little-Endian sub-offsets (`0` = CurrentDay, `4` = SevenDays, `8` = CurrentMonth, `12` = LastMonth, `16` = CurrentYear, `20` = LastYear; scale `0.1 kWh`).
 
 ## Release V1.48 – Multi-Adapter Support & Memory Alignment Fixes & Maintenace updates
 
