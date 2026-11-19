@@ -195,6 +195,9 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 # 🛠️ Changelog & What's New
 <br>
 
+## Firmware V1.51 – Maintenace update
+- **Fixed Home Assitant Discovery at startup**
+
 ## Firmware V1.50 – Stability, CAN-E3 Parser Hardening & E3onCAN DID Alignment
 
 ## Highlights & New Features
