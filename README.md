@@ -195,6 +195,30 @@ Starting with **v1.14.0**, the HCV Web Interface allows you to adjust parameters
 # 🛠️ Changelog & What's New
 <br>
 
+## Firmware V1.52 – Home Assistant Discovery and DID control update
+
+* ### New Features
+
+    Electrical Compressor Power Calculation: Added a new virtual sensor CompressorElectPwr (DE: VerdichterElektLeistung) for real-time estimation of the compressor's electrical power consumption based on current speed (DID 2569).
+
+    New Data Type INTEGER_10: Added support for tenth-RPS values (DID 2569 / CompressorSpeedRps) with direct conversion to rpm for the Web UI, MQTT JSON, and Home Assistant.
+
+* ### Improvements & Bug Fixes
+
+    Home Assistant MQTT Discovery (QoS 1 + PUBACK): Discovery payloads are now published sequentially with broker acknowledgment (PUBACK). This prevents packet loss caused by TCP queue overflows on initial connect and ensures all configured entities are reliably created.
+
+    Integer Values (INTEGER / INTEGER_10) in MQTT State JSON: Integer data points (including compressor speed, compressor starts, and operating states) are now properly serialized into the state topic (viessmann/wp/state) and updated in Home Assistant.
+
+    Preserved Module Selection on .did Upload & Restore: Converting an uploaded vcalobj.did into the binary /vobjects.dat no longer resets the system categories enabled in the Web UI (heating circuits, DHW, buffer, etc.). Boot and configuration restore loading order has also been fixed.
+
+    CAN Bus Filter for 0x55 Padding Bytes (INT_32): Unused CAN padding bytes (0x55) in 32-bit data points (such as DID 2496 current thermal capacity or DID 2369 compressor starts) are now filtered in the decoder to prevent erroneous multi-million values.
+
+* ### Important Post-Update Notes
+
+    Upload Updated vcalobj.did: After flashing the new firmware, upload the latest vcalobj.did once via the Web UI so the internal binary /vobjects.dat file in flash is regenerated with the new INTEGER_10 data type.
+
+    Home Assistant: If entities were previously missing or stuck on unknown, reload the MQTT device in Home Assistant after uploading the .did file (or remove the device once so it is cleanly recreated by the updated discovery).
+
 ## Firmware V1.51 – Maintenace update
 - **Fixed Home Assitant Discovery at startup**
 
